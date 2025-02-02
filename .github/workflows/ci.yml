@@ -12,13 +12,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: read
-  actions: read
-  id-token: write
-  statuses: write
-  discussions: write
-
 jobs:
   pint:
     name: "Code style analysis (pint)"
@@ -52,7 +45,6 @@ jobs:
       actions: read
       id-token: write
       statuses: write
-      discussions: write
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
