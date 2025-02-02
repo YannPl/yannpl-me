@@ -1,0 +1,47 @@
+---
+name: 'Setup PHP Environment'
+description: 'Sets up the PHP environment for the project'
+
+inputs:
+  php-version:
+    description: 'The PHP version to use'
+    required: false
+    default: '8.3'
+  extensions:
+    description: 'The PHP extensions to install'
+    required: false
+    default: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+  coverage:
+    description: 'The coverage driver to use'
+    required: false
+    default: pcov
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ inputs.php-version }}
+        extensions: ${{ inputs.extensions }}
+        coverage: ${{ inputs.coverage }}
+
+    - name: Install Composer dependencies
+      shell: bash
+      run: composer install -n --prefer-dist
+
+    - name: Prepare Laravel App
+      shell: bash
+      run: |
+        cp .env.example .env
+        php artisan key:generate
+
+    - name: Install Composer dependencies
+      shell: bash
+      run: composer install -n --prefer-dist
+
+    - name: Prepare Laravel App
+      shell: bash
+      run: |
+        cp .env.example .env
+        php artisan key:generate
