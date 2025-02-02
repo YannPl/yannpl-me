@@ -2,7 +2,7 @@
 
 # [YannPl.me](https://yannpl.me)
 
-This is the source code for my personal website. It is built using Laravel, Livewire, and Tailwind CSS.
+This is the source code for my personal website (Not live yet). It is built using Laravel, Livewire, and Tailwind CSS.
 
 ## Installation
 
@@ -16,6 +16,12 @@ This is the source code for my personal website. It is built using Laravel, Live
 - Use Laravel Herd or php.new to quickly setup a local development environment.
 - The default database is SQLite to provide a quick setup. You can change it in the `.env` file.
 - Husky is automatically installed with `make init` to run static analysis tools before each commit.
+
+### Reset the database and seed
+
+```bash
+make reset
+```
 
 ### Run tests
 
