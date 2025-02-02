@@ -1,0 +1,31 @@
+---
+name: 'Setup full PHP Environment'
+description: 'Sets up the PHP environment for the project'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup PHP
+      uses: ./.github/actions/setup-php-base
+      with:
+        add-extensions: sqlite, pdo_sqlite
+
+    - name: Init Database
+      shell: bash
+      run: |
+        touch database/database.sqlite
+        php artisan migrate --force
+        php artisan db:seed --force
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22'
+
+    - name: Install NPM dependencies
+      shell: bash
+      run: npm install
+
+    - name: Run Vite build
+      shell: bash
+      run: npm run build

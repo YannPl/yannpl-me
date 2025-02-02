@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup PHP
-        uses: ./.github/actions/setup-php
+        uses: ./.github/actions/setup-php-base
 
       - name: Check code style
         run: php ./vendor/bin/pint --test
@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup PHP
-        uses: ./.github/actions/setup-php
+        uses: ./.github/actions/setup-php-full
 
       - name: Run tests
         run: php artisan test --coverage
