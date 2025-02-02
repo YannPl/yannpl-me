@@ -1,5 +1,5 @@
 ---
-name: 'Setup PHP Environment'
+name: 'Setup basic PHP Environment'
 description: 'Sets up the PHP environment for the project'
 
 inputs:
@@ -7,14 +7,16 @@ inputs:
     description: 'The PHP version to use'
     required: false
     default: '8.3'
-  extensions:
+  add-extensions:
     description: 'The PHP extensions to install'
     required: false
-    default: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
   coverage:
     description: 'The coverage driver to use'
     required: false
     default: pcov
+
+env:
+  EXTENSIONS: dom, curl, libxml, mbstring, zip, pcntl, pdo, bcmath, soap, intl, gd, exif, iconv
 
 runs:
   using: 'composite'
@@ -23,7 +25,7 @@ runs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ inputs.php-version }}
-        extensions: ${{ inputs.extensions }}
+        extensions: ${{ env.EXTENSIONS }}, ${{ inputs.add-extensions }}
         coverage: ${{ inputs.coverage }}
 
     - name: Install Composer dependencies
