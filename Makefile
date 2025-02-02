@@ -42,5 +42,8 @@ larastan:
 
 analyse: pint larastan
 
+assets:
+	npm run build
+
 not-in-production:
 	@grep -q '^APP_ENV=production' .env && echo "APP_ENV is set to production. Aborting init." && exit 1 || echo "APP_ENV is not production. Proceeding with init."

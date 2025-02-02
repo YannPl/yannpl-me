@@ -12,8 +12,7 @@
         "php": "^8.3",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
-        "livewire/livewire": "^3.4",
-        "livewire/volt": "^1.0"
+        "livewire/livewire": "^3.4"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.5",
