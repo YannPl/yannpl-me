@@ -1,7 +1,7 @@
-# .phony: init reset up test deploy pint larastan check-env
+# .phony: init reset up test deploy pint larastan analyse not-in-production
 
 # init the app for development
-init: check-env
+init: not-in-production
 	composer install
 	npm install
 	npx husky init
@@ -12,7 +12,7 @@ init: check-env
 	npm run build
 
 # Restart from scratch without changing the key
-reset: check-env
+reset: not-in-production
 	composer install
 	npm install
 	php artisan migrate:fresh
@@ -29,7 +29,7 @@ test:
 
 deploy:
 	git pull
-	composer install
+	composer install --no-dev
 	npm install
 	php artisan migrate
 	npm run build
@@ -40,7 +40,7 @@ pint:
 larastan:
 	php vendor/bin/phpstan
 
-pre-commit: pint larastan
+analyse: pint larastan
 
-check-env:
+not-in-production:
 	@grep -q '^APP_ENV=production' .env && echo "APP_ENV is set to production. Aborting init." && exit 1 || echo "APP_ENV is not production. Proceeding with init."
