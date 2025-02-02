@@ -1,0 +1,38 @@
+---
+name: "CI"
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cs:
+    name: "Check code style"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: ./.github/actions/setup-php
+
+      - name: Check code style
+        run: php ./vendor/bin/pint --test
+
+  tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: ./.github/actions/setup-php
+
+      - name: Run tests
+        run: php artisan test --coverage
