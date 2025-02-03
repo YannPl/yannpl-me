@@ -6,16 +6,31 @@ This is the source code for my personal website (Not live yet). It is built usin
 
 ## Installation
 
-1. Clone the repository
-2. Init .env file `cp .env.example .env`
-2. Run `make init`
-3. Run `make up` or `npm run dev` to watch assets
+- Clone the repository
+- Init .env file `cp .env.example .env`
+- Make sure you have **Docker** installed locally
+- Make sure you have a recent version of **node** and **npm** installed locally (>20.0)
+
+### Setup Using Docker
+- Configure the `sail` alias in your `.bashrc` or `.zshrc` file
+```bash
+alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
+```
+- Run `sail up` or `sail up -d` to build the docker containers
+- Then, to init everything needed for the app, run `make init`
+
 
 ## Development
 
-- Use Laravel Herd or php.new to quickly setup a local development environment.
-- The default database is SQLite to provide a quick setup. You can change it in the `.env` file.
+- The default database is mysql, because we have a docker-compose file that runs a mysql container.
 - Husky is automatically installed with `make init` to run static analysis tools before each commit.
+
+### Start and stop the development server
+    
+```bash
+make up # Start the server & watch assets build
+make down # Stop the server
+```
 
 ### Reset the database and seed
 

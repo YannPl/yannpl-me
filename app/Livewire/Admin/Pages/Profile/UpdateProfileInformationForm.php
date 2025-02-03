@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire\Admin\Profile;
+namespace App\Livewire\Admin\Pages\Profile;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
-class UpdateProfileInformation extends Component
+class UpdateProfileInformationForm extends Component
 {
     public string $name = '';
 
@@ -18,8 +18,11 @@ class UpdateProfileInformation extends Component
      */
     public function mount(): void
     {
-        $this->name = Auth::user()->name;
-        $this->email = Auth::user()->email;
+        /** @var User $user */
+        $user = Auth::user();
+
+        $this->name = $user->name;
+        $this->email = $user->email;
     }
 
     /**
