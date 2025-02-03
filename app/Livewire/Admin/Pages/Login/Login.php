@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire\Admin\Pages\Auth;
+namespace App\Livewire\Admin\Pages\Login;
 
-use App\Livewire\Admin\Forms\LoginForm;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -24,5 +24,15 @@ class Login extends Component
         Session::regenerate();
 
         $this->redirectIntended(default: route('admin', absolute: false), navigate: true);
+    }
+
+    /**
+     * Redirect to admin route if user is already logged in when the page mounts.
+     */
+    public function mount(): void
+    {
+        if (Auth::check()) {
+            $this->redirect(route('admin', absolute: false), navigate: true);
+        }
     }
 }

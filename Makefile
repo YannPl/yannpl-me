@@ -37,7 +37,7 @@ down:
 
 ## Run the unit tests
 test:
-	$(SAIL) artisan test  --parallel
+	$(SAIL) artisan test
 
 ## Run pint code style fixer
 pint:

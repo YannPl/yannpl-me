@@ -14,7 +14,7 @@
                     </svg>
                 </div>
                 @if (Route::has('login'))
-                    <livewire:blog.welcome.navigation/>
+                    <livewire:blog.layouts.navigation/>
                 @endif
             </header>
 
