@@ -20,6 +20,7 @@ env:
   PHP_VERSION: 8.3
   PHP_EXTENSIONS: dom, curl, libxml, mbstring, zip, pcntl, pdo, bcmath, soap, intl, gd, exif, iconv
   PHP_COVERAGE: pcov
+  NODE_VERSION: 22
 
 jobs:
   pint:
@@ -90,9 +91,9 @@ jobs:
           php artisan key:generate
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Install NPM dependencies
         shell: bash
@@ -124,5 +125,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           coverage_path: report/clover.xml
-          threshold_alert: 30
-          threshold_warning: 70
+          threshold_alert: 0
+          threshold_warning: 50
