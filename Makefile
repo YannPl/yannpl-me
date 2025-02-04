@@ -8,22 +8,26 @@ help:
 
 ## init the app for development
 init: not-in-production
+	$(SAIL) up -d
 	$(SAIL) composer install
 	$(SAIL) npm install
 	npm run prepare
-	$(SAIL) php artisan key:generate
-	$(SAIL) php artisan migrate:fresh
-	$(SAIL) php artisan db:seed
-	$(SAIL) php artisan ide-helper:generate
+	$(MAKE) cc
+	$(SAIL) artisan key:generate
+	$(SAIL) artisan migrate:fresh
+	$(SAIL) artisan db:seed
+	$(SAIL) artisan ide-helper:generate
 	$(SAIL) npm run build
 
 ## Restart from scratch without changing the key (reset the database)
 reset: not-in-production
+	$(SAIL) up -d
+	$(MAKE) cc
 	$(SAIL) composer install
 	$(SAIL) npm install
-	$(SAIL) php artisan migrate:fresh
-	$(SAIL) php artisan db:seed
-	$(SAIL) php artisan ide-helper:generate
+	$(SAIL) artisan migrate:fresh
+	$(SAIL) artisan db:seed
+	$(SAIL) artisan ide-helper:generate
 	$(SAIL) npm run build
 
 ## Start the containers and watch for assets changes
@@ -37,10 +41,12 @@ down:
 
 ## Run the unit tests
 test:
-	$(SAIL) artisan test
+	$(SAIL) artisan test --coverage
 
-test-init:
-	$(SAIL)
+## Clear config and app cache
+cc:
+	$(SAIL) artisan config:clear
+	$(SAIL) artisan cache:clear
 
 ## Run pint code style fixer
 pint:
