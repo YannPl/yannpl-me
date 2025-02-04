@@ -4,18 +4,24 @@ description: 'Sets up the PHP environment for the project'
 
 runs:
   using: 'composite'
+  services:
+    mysql:
+      image: mysql:8.0
+      env:
+        MYSQL_DATABASE: testing
+        MYSQL_ROOT_PASSWORD: testrootpass
+        MYSQL_USER: sail
+        MYSQL_PASSWORD: password
+
+      ports:
+        - 3306:3306
+      options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
   steps:
     - name: Setup PHP
       uses: ./.github/actions/setup-php-base
       with:
-        add-extensions: sqlite, pdo_sqlite
-
-    - name: Init Database
-      shell: bash
-      run: |
-        touch database/database.sqlite
-        php artisan migrate --force
-        php artisan db:seed --force
+        add-extensions: mysql, pdo_mysql
 
     - name: Install Node.js
       uses: actions/setup-node@v3

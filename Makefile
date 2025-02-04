@@ -39,6 +39,9 @@ down:
 test:
 	$(SAIL) artisan test
 
+test-init:
+	$(SAIL)
+
 ## Run pint code style fixer
 pint:
 	$(SAIL) php vendor/bin/pint

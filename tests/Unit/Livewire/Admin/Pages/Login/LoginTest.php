@@ -15,3 +15,17 @@ test('the admin login page redirects to admin when user is already logged in', f
         ->test(Login::class)
         ->assertRedirect(route('admin'));
 });
+
+test('the login method authenticates the user', function () {
+    $user = User::factory()->create([
+        'email' => 'test@test.com',
+        'password' => Hash::make('password'),
+    ]);
+
+    Livewire::test(Login::class)
+        ->set('form.email', 'test@test.com')
+        ->set('form.password', 'password')
+        ->call('login')
+        ->assertRedirect(route('admin'));
+
+});

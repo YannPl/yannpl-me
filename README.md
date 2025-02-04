@@ -7,7 +7,7 @@ This is the source code for my personal website (Not live yet). It is built usin
 ## Installation
 
 - Clone the repository
-- Init .env file `cp .env.example .env`
+- Init .env file `cp .env.dev .env`
 - Make sure you have **Docker** installed locally
 - Make sure you have a recent version of **node** and **npm** installed locally (>20.0)
 
