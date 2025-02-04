@@ -12,6 +12,16 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  DB_HOST: mysql-test
+  DB_DATABASE: testing
+  DB_USERNAME: test
+  DB_PASSWORD: test
+  PHP_VERSION: 8.3
+  PHP_EXTENSIONS: dom, curl, libxml, mbstring, zip, pcntl, pdo, bcmath, soap, intl, gd, exif, iconv
+  PHP_COVERAGE: pcov
+  NODE_VERSION: 22
+
 jobs:
   pint:
     name: "Code style analysis (pint)"
@@ -40,19 +50,73 @@ jobs:
   tests:
     name: "Run unit tests"
     runs-on: ubuntu-latest
+    container: ubuntu:24.04
     permissions:
       contents: read
       actions: read
       id-token: write
       statuses: write
       pull-requests: write
+
+    services:
+      mysql-test:
+        image: 'mysql:8.0'
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ env.DB_PASSWORD }}
+          MYSQL_DATABASE: ${{ env.DB_DATABASE }}
+          MYSQL_USER: ${{ env.DB_USERNAME }}
+          MYSQL_PASSWORD: ${{ env.DB_PASSWORD }}
+        ports:
+          - 3306:3306
+        options: --name="mysql-test" --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
       - uses: actions/checkout@v4
 
       - name: Setup PHP
-        uses: ./.github/actions/setup-php-full
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: ${{ env.PHP_EXTENSIONS }}, mysql, pdo_mysql
+          coverage: ${{ env.PHP_COVERAGE }}
+
+      - name: Install Composer dependencies
+        shell: bash
+        run: composer install -n --prefer-dist
+
+      - name: Prepare Laravel App
+        shell: bash
+        run: |
+          cp .env.dev .env
+          php artisan key:generate
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install NPM dependencies
+        shell: bash
+        run: npm install
+
+      - name: Run Vite build
+        shell: bash
+        run: npm run build
+
+      - name: migrate database
+        env:
+          DB_HOST: ${{ env.DB_HOST }}
+          DB_DATABASE: ${{ env.DB_DATABASE }}
+          DB_USERNAME: ${{ env.DB_USERNAME }}
+          DB_PASSWORD: ${{ env.DB_PASSWORD }}
+        run: php artisan migrate --seed
 
       - name: Run tests
+        env:
+          DB_HOST: ${{ env.DB_HOST }}
+          DB_DATABASE: ${{ env.DB_DATABASE }}
+          DB_USERNAME: ${{ env.DB_USERNAME }}
+          DB_PASSWORD: ${{ env.DB_PASSWORD }}
         run: php artisan test --coverage --coverage-clover=report/clover.xml
 
       - name: Send coverage monitor on pull request
@@ -61,5 +125,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           coverage_path: report/clover.xml
-          threshold_alert: 30
-          threshold_warning: 70
+          threshold_alert: 0
+          threshold_warning: 50

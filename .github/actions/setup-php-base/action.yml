@@ -35,7 +35,7 @@ runs:
     - name: Prepare Laravel App
       shell: bash
       run: |
-        cp .env.example .env
+        cp .env.dev .env
         php artisan key:generate
 
     - name: Install Composer dependencies
@@ -45,5 +45,5 @@ runs:
     - name: Prepare Laravel App
       shell: bash
       run: |
-        cp .env.example .env
+        cp .env.dev .env
         php artisan key:generate
