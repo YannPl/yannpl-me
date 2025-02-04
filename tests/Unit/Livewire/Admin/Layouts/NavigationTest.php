@@ -10,3 +10,14 @@ test('the admin navigation component renders successfully', function () {
         ->test(Navigation::class)
         ->assertStatus(200);
 });
+
+test('the admin navigation component logs the user out', function () {
+    $user = User::factory()->create();
+
+    Livewire::actingAs($user)
+        ->test(Navigation::class)
+        ->call('logout')
+        ->assertRedirect('/');
+
+    expect(auth()->check())->toBeFalse();
+});
