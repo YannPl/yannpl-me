@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? 'Page Title' }}</title>
+    <title>{{ $title ?? config('app.name', 'Page Title') }}</title>
 
     <!-- Scripts -->
     @vite(['resources/css/blog.css', 'resources/js/blog.js'])
     @livewireStyles
 </head>
-<body class="font-sans text-gray-900 antialiased">
+<body class="antialiased">
 {{ $slot }}
 @livewireScripts
 </body>
