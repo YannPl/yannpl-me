@@ -1,6 +1,8 @@
 # .PHONY: init reset up stop test deploy pint larastan analyse assets not-in-production
 
 SAIL := ./vendor/bin/sail
+docker_exec: $(SAIL) exec laravel.test
+args = $(filter-out $@,$(MAKECMDGOALS))
 
 ## Show this help message
 help:
@@ -30,6 +32,9 @@ reset: not-in-production
 	$(SAIL) artisan ide-helper:generate
 	$(SAIL) npm run build
 
+fix-permissions:
+	$(docker_exec) chmod -R 775 storage bootstrap/cache
+
 ## Start the containers and watch for assets changes
 up:
 	$(SAIL) up -d
@@ -43,10 +48,13 @@ down:
 test:
 	$(SAIL) artisan test --coverage
 
-## Clear config and app cache
+## Clear config cache, route cache, view cache
 cc:
-	$(SAIL) artisan config:clear
 	$(SAIL) artisan cache:clear
+	$(SAIL) artisan config:clear
+	$(SAIL) artisan route:clear
+	$(SAIL) artisan view:clear
+
 
 ## Run pint code style fixer
 pint:
