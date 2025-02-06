@@ -1,7 +1,7 @@
 # .PHONY: init reset up stop test deploy pint larastan analyse assets not-in-production
 
 SAIL := ./vendor/bin/sail
-docker_exec: $(SAIL) exec laravel.test
+docker_exec:= $(SAIL) exec laravel.test
 args = $(filter-out $@,$(MAKECMDGOALS))
 
 ## Show this help message
@@ -32,8 +32,9 @@ reset: not-in-production
 	$(SAIL) artisan ide-helper:generate
 	$(SAIL) npm run build
 
-fix-permissions:
-	$(docker_exec) chmod -R 775 storage bootstrap/cache
+## Build all the assets
+build:
+	$(SAIL) npm run build
 
 ## Start the containers and watch for assets changes
 up:

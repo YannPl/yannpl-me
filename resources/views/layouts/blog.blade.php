@@ -8,12 +8,13 @@
     <title>{{ $title ?? config('app.name', 'Page Title') }}</title>
 
     <!-- Scripts -->
-    @vite(['resources/css/blog.css', 'resources/js/blog.js'])
+    @vite('resources/css/blog.css')
     @livewireStyles
 </head>
 <body class="antialiased">
 {{ $slot }}
 @livewireScripts
+@vite('resources/js/blog.js')
 </body>
 </html>
 

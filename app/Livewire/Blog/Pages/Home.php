@@ -6,6 +6,4 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 #[Layout('layouts.blog')]
-class Home extends Component
-{
-}
+class Home extends Component {}
