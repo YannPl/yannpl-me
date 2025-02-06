@@ -2,11 +2,13 @@
 
 @plugin '@tailwindcss/forms';
 @plugin "flowbite/plugin";
+@plugin "flowbite-typography";
+
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source "../node_modules/flowbite";
 
 @theme {
-  --font-sans: Figtree, ui-sans-serif, system-ui, sans-serif,
+  --font-sans: Nunito, Figtree, ui-sans-serif, system-ui, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
