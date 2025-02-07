@@ -17,9 +17,10 @@ class ArticleFactory extends Factory
         return [
             'uuid' => $this->faker->uuid(),
             'slug' => $this->faker->slug(),
-            'title' => $this->faker->sentence(),
-            'content' => $this->faker->paragraph(),
-
+            'is_published' => $this->faker->boolean(),
+            'created_by_id' => 1,
+            'current_rich_content_id' => 1,
+            'category_id' => 1,
         ];
     }
 }

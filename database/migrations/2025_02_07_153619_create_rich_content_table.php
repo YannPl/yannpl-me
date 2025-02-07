@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('rich_content', function (Blueprint $table) {
+        Schema::create('rich_contents', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
             $table->string('title');

@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('page', function (Blueprint $table) {
+        Schema::create('pages', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
             $table->string('slug')->unique();
             $table->boolean('is_published')->default(false);
             $table->bigInteger('created_by_id', unsigned: true);
-            $table->foreign('created_by_id')->references('id')->on('user');
+            $table->foreign('created_by_id')->references('id')->on('users');
             $table->bigInteger('current_rich_content_id', unsigned: true);
-            $table->foreign('current_rich_content_id')->references('id')->on('rich_content');
+            $table->foreign('current_rich_content_id')->references('id')->on('rich_contents');
             $table->bigInteger('category_id', unsigned: true);
-            $table->foreign('category_id')->references('id')->on('category');
+            $table->foreign('category_id')->references('id')->on('categorys');
             $table->timestamps();
         });
 

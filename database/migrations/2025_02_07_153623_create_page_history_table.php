@@ -15,9 +15,9 @@ return new class extends Migration
 
         Schema::create('page_history', function (Blueprint $table) {
             $table->bigInteger('page_id', unsigned: true);
-            $table->foreign('page_id')->references('id')->on('page');
+            $table->foreign('page_id')->references('id')->on('pages');
             $table->bigInteger('rich_content_id', unsigned: true);
-            $table->foreign('rich_content_id')->references('id')->on('rich_content');
+            $table->foreign('rich_content_id')->references('id')->on('rich_contents');
             $table->timestamp('saved_at');
             $table->primary(['page_id', 'rich_content_id']);
         });

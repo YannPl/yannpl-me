@@ -32,6 +32,11 @@ reset: not-in-production
 	$(SAIL) artisan ide-helper:generate
 	$(SAIL) npm run build
 
+## Reset the database with migrations and seeders
+db-reset:
+	$(SAIL) artisan migrate:fresh
+	$(SAIL) artisan db:seed
+
 ## Build all the assets
 build:
 	$(SAIL) npm run build

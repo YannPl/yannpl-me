@@ -9,12 +9,12 @@
         </p>
     </header>
 
-    <x-danger-button
+    <x-admin.danger-button
         x-data=""
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-danger-button>
+    >{{ __('Delete Account') }}</x-admin.danger-button>
 
-    <x-modal name="confirm-user-deletion" :show="$errors->isNotEmpty()" focusable>
+    <x-admin.modal name="confirm-user-deletion" :show="$errors->isNotEmpty()" focusable>
         <form wire:submit="deleteUser" class="p-6">
 
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -26,9 +26,9 @@
             </p>
 
             <div class="mt-6">
-                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only"/>
+                <x-admin.input-label for="password" value="{{ __('Password') }}" class="sr-only"/>
 
-                <x-text-input
+                <x-admin.text-input
                     wire:model="password"
                     id="password"
                     name="password"
@@ -37,18 +37,18 @@
                     placeholder="{{ __('Password') }}"
                 />
 
-                <x-input-error :messages="$errors->get('password')" class="mt-2"/>
+                <x-admin.input-error :messages="$errors->get('password')" class="mt-2"/>
             </div>
 
             <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
+                <x-admin.secondary-button x-on:click="$dispatch('close')">
                     {{ __('Cancel') }}
-                </x-secondary-button>
+                </x-admin.secondary-button>
 
-                <x-danger-button class="ms-3">
+                <x-admin.danger-button class="ms-3">
                     {{ __('Delete Account') }}
-                </x-danger-button>
+                </x-admin.danger-button>
             </div>
         </form>
-    </x-modal>
+    </x-admin.modal>
 </section>
