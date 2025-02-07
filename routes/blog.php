@@ -1,3 +1,3 @@
 <?php
 
-Route::get('/', \App\Livewire\Blog\Pages\Index::class);
+Route::get('/', \App\Livewire\Blog\Pages\Home::class);
