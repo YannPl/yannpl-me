@@ -15,9 +15,9 @@ return new class extends Migration
 
         Schema::create('article_tag', function (Blueprint $table) {
             $table->bigInteger('tag_id', unsigned: true);
-            $table->foreign('tag_id')->references('id')->on('tag');
+            $table->foreign('tag_id')->references('id')->on('tags');
             $table->bigInteger('article_id', unsigned: true);
-            $table->foreign('article_id')->references('id')->on('article');
+            $table->foreign('article_id')->references('id')->on('articles');
             $table->primary(['tag_id', 'article_id']);
         });
 

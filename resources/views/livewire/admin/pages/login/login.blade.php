@@ -1,25 +1,25 @@
 <div>
     <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <x-admin.auth-session-status class="mb-4" :status="session('status')" />
 
     <form wire:submit="login">
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
+            <x-admin.input-label for="email" :value="__('Email')" />
+            <x-admin.text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
+            <x-admin.input-error :messages="$errors->get('form.email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-admin.input-label  for="password" :value="__('Password')" />
 
-            <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full"
+            <x-admin.text-input wire:model="form.password" id="password" class="block mt-1 w-full"
                           type="password"
                           name="password"
                           required autocomplete="current-password" />
 
-            <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
+            <x-admin.input-error :messages="$errors->get('form.password')" class="mt-2" />
         </div>
 
         <!-- Remember Me -->
@@ -37,9 +37,9 @@
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
+            <x-admin.primary-button class="ms-3">
                 {{ __('Log in') }}
-            </x-primary-button>
+            </x-admin.primary-button>
         </div>
     </form>
 </div>
