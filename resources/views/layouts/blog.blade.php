@@ -14,7 +14,8 @@
     @vite('resources/css/blog.css')
     @livewireStyles
 </head>
-<body class="antialiased">
+<body class="relative antialiased">
+<x-blog.dark-mode-switch/>
 <x-blog.header/>
 {{ $slot }}
 <x-blog.footer/>

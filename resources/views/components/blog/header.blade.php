@@ -2,9 +2,7 @@
     <div class="pt-4 pb-0 px-4 mx-auto max-w-screen-xl text-center lg:pb-0 lg:pt-8">
         <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-2xl lg:text-6xl dark:text-white"><span class="text-transparent text-6xl bg-clip-text bg-gradient-to-r from-blue-700 to-purple-700">YannPl</span> <br/>
             <span class="text-2xl text-gray-500 font-extralight">Tech, Photo, Adventure, random human's blog</span></h1>
-
     </div>
-
 
     <nav class="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -23,8 +21,6 @@
             </div>
             <x-blog.social-links />
             <x-blog.search-input />
-
-
         </div>
     </nav>
 

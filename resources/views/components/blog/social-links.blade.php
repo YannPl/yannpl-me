@@ -1,4 +1,4 @@
-<div class="align-content-center text-gray-500 items-center justify-left hidden w-full md:flex md:w-auto md:order-2">
+<div class="align-content-center text-gray-500 items-center justify-center hidden w-full md:flex md:w-auto md:order-2">
 {{--    Linkedin --}}
     <a href="https://www.linkedin.com/in/yannplantevin/">
         <svg class="w-[30px] h-[30px] mx-1 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
