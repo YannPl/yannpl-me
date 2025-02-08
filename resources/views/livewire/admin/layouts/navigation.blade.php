@@ -16,6 +16,11 @@
                         {{ __('Dashboard') }}
                     </x-admin.nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-admin.nav-link :href="route('write-article')" :active="request()->routeIs('write-article')" wire:navigate>
+                        {{ __('Articles') }}
+                    </x-admin.nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
