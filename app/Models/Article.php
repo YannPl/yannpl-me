@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Database\Factories\ArticleFactory;
+use Illuminate\Database\Eloquent\Concerns\HasTimestamps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Article extends Model
 {
     /** @use HasFactory<ArticleFactory> */
-    use HasFactory;
+    use HasFactory, HasTimestamps;
 
     /**
      * The attributes that are mass assignable.
@@ -32,7 +33,7 @@ class Article extends Model
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * Get the user that created the article.
@@ -78,5 +79,14 @@ class Article extends Model
     public function articleHistory(): BelongsToMany
     {
         return $this->belongsToMany(RichContent::class, 'article_history');
+    }
+
+    /**
+     * @param  array<Article>  $models
+     * @return ArticleCollection<Article>
+     */
+    public function newCollection(array $models = []): ArticleCollection
+    {
+        return new ArticleCollection($models);
     }
 }
