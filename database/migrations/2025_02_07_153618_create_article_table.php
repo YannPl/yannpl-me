@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreign('current_rich_content_id')->references('id')->on('rich_contents');
             $table->bigInteger('category_id', unsigned: true);
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();
