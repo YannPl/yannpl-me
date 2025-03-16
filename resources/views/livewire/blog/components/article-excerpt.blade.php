@@ -34,7 +34,8 @@
                             <time datetime="{{ $isoDate }}" class="text-gray-500 dark:text-gray-400">{{ $formattedDate }}</time>
                         </p>
                         <span class="mx-2">|</span>
-                        <a class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 cursor-pointer rounded-sm dark:bg-gray-700 dark:text-blue-400 border border-blue-400">
+                        <a class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 cursor-pointer rounded-sm dark:bg-gray-700 dark:text-blue-400 border border-blue-400"
+                            href="{{ route('home', $category->slug) }}">
                             <svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                  fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
@@ -42,7 +43,7 @@
                                       clip-rule="evenodd"/>
                             </svg>
 
-                            Design
+                            {{ $category->name }}
                         </a>
                         <span class="mx-2">|</span>
                         <span

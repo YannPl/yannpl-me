@@ -8,7 +8,8 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 #[Layout('layouts.blog')]
-class Home extends Component {
+class Home extends Component
+{
     public const PAGE_SIZE = 5;
 
     public ArticleCollection $articles;
@@ -19,6 +20,6 @@ class Home extends Component {
             ->skip($page * self::PAGE_SIZE)
             ->take(self::PAGE_SIZE)
             ->get();
-//        dd($this->articles);
+        //        dd($this->articles);
     }
 }
