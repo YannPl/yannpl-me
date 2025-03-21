@@ -23,6 +23,7 @@ class RichContent extends Model
         'seo_title',
         'seo_description',
         'main_image',
+        'excerpt_text',
         'html',
         'editor_json',
     ];

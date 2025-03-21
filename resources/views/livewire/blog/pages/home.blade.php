@@ -9,9 +9,4 @@
         </div>
         @endforeach
     </main>
-
-    <livewire:blog.components.related-articles/>
-
-
-
 </div>

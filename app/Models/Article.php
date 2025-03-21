@@ -2,13 +2,20 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Database\Factories\ArticleFactory;
 use Illuminate\Database\Eloquent\Concerns\HasTimestamps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
+/**
+ * @property Category $category
+ * @property Carbon $created_at
+ * @property RichContent $currentRichContent
+ */
 class Article extends Model
 {
     /** @use HasFactory<ArticleFactory> */
@@ -74,19 +81,10 @@ class Article extends Model
     }
 
     /**
-     * @return BelongsToMany<RichContent, $this>
+     * @return BelongsToMany<RichContent, $this, Pivot>
      */
     public function articleHistory(): BelongsToMany
     {
         return $this->belongsToMany(RichContent::class, 'article_history');
-    }
-
-    /**
-     * @param  array<Article>  $models
-     * @return ArticleCollection<Article>
-     */
-    public function newCollection(array $models = []): ArticleCollection
-    {
-        return new ArticleCollection($models);
     }
 }

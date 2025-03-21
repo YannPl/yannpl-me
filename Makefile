@@ -62,6 +62,9 @@ cc:
 	$(SAIL) artisan route:clear
 	$(SAIL) artisan view:clear
 
+## run any artisan command
+a:
+	$(SAIL) artisan $(args)
 
 ## Run pint code style fixer
 pint:
