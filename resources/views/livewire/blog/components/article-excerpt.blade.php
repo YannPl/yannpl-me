@@ -2,7 +2,10 @@
     class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
     <header class="mb-4 lg:mb-6 not-format">
         <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
-            {{ $article->currentRichContent->title }}</h1>
+            <a href="{{ route('article',[
+                'article_slug' => $article->slug,
+                'category' => $article->category->slug ?? 'uncategorized',
+            ]) }}">{{ $article->currentRichContent->title }}</a></h1>
         <livewire:blog.components.article-metadata :$article/>
     </header>
     <figure><img class="rounded-xl"

@@ -87,4 +87,9 @@ class Article extends Model
     {
         return $this->belongsToMany(RichContent::class, 'article_history');
     }
+
+    public static function findBySlug(string $slug): self
+    {
+        return self::where('slug', $slug)->firstOrFail();
+    }
 }

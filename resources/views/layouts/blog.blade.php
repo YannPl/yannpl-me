@@ -7,13 +7,13 @@
 
     <link rel="icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon"/>
 
-    <title>{{ $title ?? config('app.name', 'Page Title') }}{{ $subtitle ? ' - '.$subtitle  : ''}}</title>
+    <title>{{ $title ?? config('app.name', 'Page Title') }}{{ isset($subtitle) ? ' - '.$subtitle  : ' - ' . config('app.subtitle', 'Page subtitle')}}</title>
 
     <!-- Scripts -->
     @vite('resources/css/blog.css')
     @livewireStyles
 </head>
-<body class="relative antialiased">
+<body class="relative antialiased bg-white dark:bg-gray-900 dark:text-white">
 <x-blog.dark-mode-switch/>
 <x-blog.header/>
 {{ $slot }}
