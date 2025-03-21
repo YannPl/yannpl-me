@@ -1,0 +1,10 @@
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Method App\\Models\\Article::tags\(\) should return Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany<App\\Models\\Tag, \$this\(App\\Models\\Article\)> but returns Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany<App\\Models\\Tag, \$this\(App\\Models\\Article\), Illuminate\\Database\\Eloquent\\Relations\\Pivot>\.$#'
+            identifier: return.type
+            path: app/Models/Article.php
+        -
+            message: '#^Generic type Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany<App\\Models\\RichContent, \$this\(App\\Models\\Article\), Illuminate\\Database\\Eloquent\\Relations\\Pivot> in PHPDoc tag @return specifies 3 template types, but class Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany supports only 2: TRelatedModel, TDeclaringModel$#'
+            identifier: generics.moreTypes
+            path: app/Models/Article.php

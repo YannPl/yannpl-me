@@ -20,7 +20,8 @@ class RichContentFactory extends Factory
             'seo_title' => $this->faker->sentence(),
             'seo_description' => $this->faker->sentence(),
             'main_image' => $this->faker->imageUrl(),
-            'html' => $this->faker->paragraph(),
+            'excerpt_text' => $this->faker->paragraph(),
+            'html' => implode('<hr>', array_map(fn ($paragraph) => '<p>'.$paragraph.'</p>', $this->faker->paragraphs(8))),
             'editor_json' => $this->faker->paragraph(),
         ];
     }

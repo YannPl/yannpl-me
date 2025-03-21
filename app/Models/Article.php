@@ -2,16 +2,24 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Database\Factories\ArticleFactory;
+use Illuminate\Database\Eloquent\Concerns\HasTimestamps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
+/**
+ * @property Category $category
+ * @property Carbon $created_at
+ * @property RichContent $currentRichContent
+ */
 class Article extends Model
 {
     /** @use HasFactory<ArticleFactory> */
-    use HasFactory;
+    use HasFactory, HasTimestamps;
 
     /**
      * The attributes that are mass assignable.
@@ -32,7 +40,7 @@ class Article extends Model
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * Get the user that created the article.
@@ -73,7 +81,7 @@ class Article extends Model
     }
 
     /**
-     * @return BelongsToMany<RichContent, $this>
+     * @return BelongsToMany<RichContent, $this, Pivot>
      */
     public function articleHistory(): BelongsToMany
     {

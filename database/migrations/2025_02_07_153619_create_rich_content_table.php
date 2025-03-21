@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('seo_title');
             $table->string('seo_description');
             $table->text('main_image');
+            $table->text('excerpt_text');
             $table->longText('html');
             $table->longText('editor_json');
             $table->timestamps();

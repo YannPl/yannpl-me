@@ -23,7 +23,6 @@ init: not-in-production
 
 ## Restart from scratch without changing the key (reset the database)
 reset: not-in-production
-	$(SAIL) up -d
 	$(MAKE) cc
 	$(SAIL) composer install
 	$(SAIL) npm install
@@ -44,6 +43,8 @@ build:
 ## Start the containers and watch for assets changes
 up:
 	$(SAIL) up -d
+
+dev:
 	$(SAIL) npm run dev
 
 ## Stop the containers
@@ -61,6 +62,9 @@ cc:
 	$(SAIL) artisan route:clear
 	$(SAIL) artisan view:clear
 
+## run any artisan command
+a:
+	$(SAIL) artisan $(args)
 
 ## Run pint code style fixer
 pint:
